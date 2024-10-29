@@ -1,0 +1,58 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div style="
+        border-radius: 56px;
+        padding: 0.3rem;
+        background: linear-gradient(
+          180deg,
+          var(--primary-color) 10%,
+          rgba(33, 150, 243, 0) 30%
+        );
+      ">
+            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
+                <div class="text-center mb-5">
+                    <div style=" display: flex; justify-content: center;">
+                        <img src="assets/logo-completo.jpg" alt="Inventário Certo" class="mb-5 w-6rem flex-shrink-0" />
+                    </div>
+
+                    <span class="text-600 font-medium">Entre com suas credenciais para acessar o sistema</span>
+                </div>
+
+                <form [formGroup]="loginForm" (ngSubmit)="login()
+          ">
+                    <label for="email1" class="block text-900 text-xl font-medium mb-2">Usuário</label>
+                    <input id="email1" type="email" formControlName="email" pInputText class="w-full md:w-30rem mb-5"
+                        style="padding: 1rem" />
+
+                    <label for="password1" class="block text-900 font-medium text-xl mb-2">Senha</label>
+                    <div style="display: flex; flex-direction: column">
+                        <p-password id="password1" formControlName="password" [toggleMask]="true" [feedback]="false"
+                            inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                        <small class="font-semibold mb-2 error-msg" *ngIf="
+                loginForm.get('password')?.touched &&
+                loginForm.get('password')?.invalid
+              ">
+                            {{
+                            loginForm.get('password')?.errors?.['required']
+                            ? 'Esse campo é obrigatório.'
+                            : 'A senha deve conter ao menos 3 caracteres.'
+                            }}
+                        </small>
+                    </div>
+
+                    <div class="flex align-items-center justify-content-between mb-5 mt-5 gap-5">
+                        <div class="flex align-items-center">
+                            <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"
+                                formControlName="lembrarUsuario"></p-checkbox>
+                            <label for="rememberme1">Lembrar de mim?</label>
+                        </div>
+                        <a class="font-medium no-underline ml-2 text-right cursor-pointer"
+                            style="color: var(--primary-color)">Esqueceu a senha?</a>
+                    </div>
+
+                    <button pButton pRipple label="Entrar" type="submit" class="w-full p-3 text-xl"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

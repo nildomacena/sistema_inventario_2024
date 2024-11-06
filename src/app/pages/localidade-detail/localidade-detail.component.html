@@ -36,10 +36,11 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="width:10%" pSortableColumn="patrimonio">Patrimônio</th>
-                <th pSortableColumn="descricao">Descrição</th>
-                <th pSortableColumn="indica_desfazimento">Indica p/ desfazimento</th>
-                <th pSortableColumn="bem_valor">Cadastrado por</th>
+                <th  pSortableColumn="patrimonio">Patrimônio <p-sortIcon field="patrimonio" /></th>
+                <th style="width:40%" pSortableColumn="descricao">Descrição <p-sortIcon field="descricao" /></th>
+                <th pSortableColumn="indica_desfazimento">Indica p/ desfazimento <p-sortIcon
+                        field="indica_desfazimento" /></th>
+                <th pSortableColumn="usuario_cadastrante">Cadastrado por <p-sortIcon field="usuario_cadastrante" /></th>
                 <th>Ações</th>
             </tr>
         </ng-template>

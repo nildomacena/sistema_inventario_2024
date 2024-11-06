@@ -1,0 +1,8 @@
+<div class="card" [ngStyle]="{'background-color': color}">
+    <div class="card-body">
+        <div class="card-number">{{ quantidade }}</div>
+        <div class="card-label">{{title}}</div>
+        <div class="divider"></div>
+        <p-button label="Ver Mais" (onClick)="onClick()" size="small" icon="pi pi-search" [outlined]="true"></p-button>
+    </div>
+</div>

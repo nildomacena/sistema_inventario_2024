@@ -1,0 +1,58 @@
+<section>
+    @if(localidade){
+    <p-card [header]="localidade.localidade_nome" [style]="{width: '100%'}">
+        <div class="p-grid">
+            <div class="p-col-12 p-md-6">
+                <div class="p-field">
+                    <label for="localidade_id">Número da Localidade:
+                        <strong>{{localidade.inventario_localidade_id}}</strong> </label>
+
+                </div>
+            </div>
+            <div class="p-col-12 p-md-6">
+                <div class="p-field">
+                    <label for="status_inventario">Status:
+                        <strong>{{formatarStatus(localidade.status_inventario)}}</strong> </label>
+
+                </div>
+            </div>
+            <div class="p-col-12 p-md-6">
+                <div class="p-field">
+                    <label for="numero_bens">Bens Cadastrados: <strong>{{localidade.numero_bens}}</strong> </label>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <button pButton type="button" label="Voltar" icon="pi pi-arrow-left" (click)="voltar()"></button>
+        </p-footer>
+    </p-card>
+    }
+
+    <p-table [value]="bens" styleClass="p-datatable-gridlines">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                Bens Cadastrados
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:10%" pSortableColumn="patrimonio">Patrimônio</th>
+                <th pSortableColumn="descricao">Descrição</th>
+                <th pSortableColumn="indica_desfazimento">Indica p/ desfazimento</th>
+                <th pSortableColumn="bem_valor">Cadastrado por</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-bem>
+            <tr (dblclick)="acessarBem(bem)" class="table-tr-small-padding">
+                <td>{{ bem.patrimonio ?? 'Sem Patrimônio' }}</td>
+                <td>{{ bem.descricao }}</td>
+                <td>{{ bem.indica_desfazimento ? 'Sim': 'Não' }}</td>
+                <td>{{ bem.usuario_cadastrante }}</td>
+                <td>
+                    <p-button icon="pi pi-search" (onClick)="acessarBem(bem)" />
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</section>

@@ -8,7 +8,7 @@ import {
   User,
 } from '@supabase/supabase-js'
 import { environment } from '../../environments/environment';
-import { first } from 'rxjs';
+import { BehaviorSubject, first } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +16,29 @@ import { first } from 'rxjs';
 export class SupabaseService {
   private supabase!: SupabaseClient
   _session: AuthSession | null = null
+  isLoggedIn = false
+  onAuthStateChange: BehaviorSubject<Session | null> = new BehaviorSubject<Session | null>(null);
+  userLogged?: User;
 
   constructor(
     private applicationRef: ApplicationRef,) {
     this.applicationRef.isStable.pipe(first((isStable) => isStable)).subscribe(() => {
       this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    });
+      this.supabase.auth.getSession().then((value) => {
+        const data = value.data;
+        this._session = value.data.session;
+        this.isLoggedIn = data !== null
+        this.onAuthStateChange.next(data?.session);
+        this.userLogged = data?.session?.user;
+      })
 
+      this.supabase.auth.onAuthStateChange((event, session) => {
+        this._session = session
+        this.isLoggedIn = session !== null
+        this.onAuthStateChange.next(session);
+        this.userLogged = session?.user
+      });
+    });
   }
 
   get session() {

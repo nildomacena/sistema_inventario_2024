@@ -13,7 +13,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { SupabaseService } from '../../services/supabase.service';
 import { Router } from '@angular/router';
- 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -54,7 +54,6 @@ export class LoginComponent {
         this.loginForm.value.password
       )
       if (error) throw error
-      alert('Check your email for the login link!')
       this.router.navigate(['/home'])
     } catch (error) {
       if (error instanceof Error) {

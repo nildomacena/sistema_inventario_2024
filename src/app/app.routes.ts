@@ -22,6 +22,13 @@ export const routes: Routes = [
     {
         path: 'localidades/:id',
         loadComponent: () => import('./pages/localidade-detail/localidade-detail.component').then(m => m.LocalidadeDetailComponent),
-    }
-
+    },
+    {
+        path: 'localidade-print/:id',
+        loadComponent: () => import('./pages/localidade-detail-leitura/localidade-detail-leitura.component').then(m => m.LocalidadeDetailLeituraComponent),
+    },
+    {
+        path: 'bens',
+        loadComponent: () => import('./pages/bens/bens.component').then(m => m.BensComponent),
+    },
 ];

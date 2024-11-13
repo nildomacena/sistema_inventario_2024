@@ -24,10 +24,27 @@
         </div>
         <p-footer>
             <button pButton type="button" label="Voltar" icon="pi pi-arrow-left" (click)="voltar()"></button>
+            <button style="margin-left: 10px;" pButton type="button" label="Imprimir" icon="pi pi-print" (click)="imprimir()"></button>
         </p-footer>
     </p-card>
-    }
+    <div class="control-buttons p-mt-4 p-d-flex p-jc-between p-ai-center" style="display: flex;">
+        <div class="p-button-group">
+            <button pButton type="button" label="Tabela" icon="pi pi-table" [outlined]="displayMode === 'card'"
+                (click)="toggleDisplayMode('table')">
+            </button>
+            <button pButton type="button" label="Card" icon="pi pi-th-large" [outlined]="displayMode === 'table'"
+                (click)="toggleDisplayMode('card')">
+            </button>
+        </div>
 
+        <div *ngIf="displayMode === 'card'" class="cards-per-row-selector" style="margin-left: 10px;">
+            <p-dropdown [options]="cardsPerRowOptions" [(ngModel)]="selectedCardsPerRow" optionLabel="label"
+                optionValue="value" placeholder="Cards por Linha">
+            </p-dropdown>
+        </div>
+    </div>
+
+    @if(displayMode === 'table'){
     <p-table [value]="bens" styleClass="p-datatable-gridlines">
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
@@ -36,7 +53,7 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th  pSortableColumn="patrimonio">Patrimônio <p-sortIcon field="patrimonio" /></th>
+                <th pSortableColumn="patrimonio">Patrimônio <p-sortIcon field="patrimonio" /></th>
                 <th style="width:40%" pSortableColumn="descricao">Descrição <p-sortIcon field="descricao" /></th>
                 <th pSortableColumn="indica_desfazimento">Indica p/ desfazimento <p-sortIcon
                         field="indica_desfazimento" /></th>
@@ -56,4 +73,11 @@
             </tr>
         </ng-template>
     </p-table>
+    } @else {
+    <div class="cards">
+        <app-card-bem *ngFor="let bem of bens" [bem]="bem" class="col-{{selectedCardsPerRow}}">
+        </app-card-bem>
+    </div>
+    }
+    }
 </section>

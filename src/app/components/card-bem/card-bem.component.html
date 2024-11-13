@@ -1,0 +1,8 @@
+<p-card [header]="bem.patrimonio ? 'Patrimônio: '+ bem.patrimonio : 'Sem Patrimônio' "
+    [subheader]="'Cadastrado por: '+bem.usuario_cadastrante">
+    <ng-template pTemplate="header">
+        <img alt="Card" [src]="bem.url_imagem" />
+    </ng-template>
+    <p>{{bem.descricao}}</p>
+    <p>Cadastrado em: {{ bem.cadastrado_em | date : 'dd/MM/yyyy hh:mm' }}</p>
+</p-card>

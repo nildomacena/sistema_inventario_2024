@@ -6,4 +6,5 @@ export interface Bem {
     observacoes: string;
     usuario_cadastrante: string;
     url_imagem: string;
+    cadastrado_em: string;
 }

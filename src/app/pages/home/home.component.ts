@@ -7,6 +7,8 @@ import { first } from 'rxjs';
 import { ButtonModule } from 'primeng/button';
 import { CardLocalidadesInfoComponent } from '../../components/card-localidades-info/card-localidades-info.component';
 import { BensService } from '../../services/bens.service';
+import { Router } from '@angular/router';
+import { PanelModule } from 'primeng/panel';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +19,7 @@ import { BensService } from '../../services/bens.service';
     CardModule,
     ButtonModule,
     CardLocalidadesInfoComponent,
-
+    PanelModule
   ],
   providers: [
     FormBuilder,
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit {
   localidadeService = inject(LocalidadeService);
   bensService = inject(BensService);
   zone = inject(NgZone);
+  router = inject(Router);
 
   constructor() {
     this.formLocalidade = this.fb.group({
@@ -52,6 +55,14 @@ export class HomeComponent implements OnInit {
     this.applicationRef.isStable.pipe(first((isStable) => isStable)).subscribe(() => {
       this.buscarLocalidades();
     });
+  }
+
+  goToLocalidades() {
+    this.router.navigate(['/localidades']);
+  }
+
+  goToBens() {
+    this.router.navigate(['/bens']);
   }
 
   async criarLocalidade() {

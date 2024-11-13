@@ -1,19 +1,19 @@
 <section class="p-3">
     <div class="cards">
-        <app-card-localidades-info class="col-6" [quantidade]="localidades.length" color="#90f49085"
-            title="Localidades Cadastradas">
+        <app-card-localidades-info class="col-6" (verMais)="goToLocalidades() " [quantidade]="localidades.length"
+            color="#90f49085" title="Localidades Cadastradas">
         </app-card-localidades-info>
 
-        <app-card-localidades-info class="col-6" [quantidade]="localidadesEmAndamento.length" color="#90a1f485"
-            title="Localidades Em Andamento">
+        <app-card-localidades-info class="col-6" (verMais)="goToLocalidades() "
+            [quantidade]="localidadesEmAndamento.length" color="#90a1f485" title="Localidades Em Andamento">
         </app-card-localidades-info>
 
-        <app-card-localidades-info class="col-6" [quantidade]="localidadesFinalizadas.length" color="#f4909085"
-            title="Localidades Finalizadas">
+        <app-card-localidades-info class="col-6" (verMais)="goToLocalidades() "
+            [quantidade]="localidadesFinalizadas.length" color="#f4909085" title="Localidades Finalizadas">
         </app-card-localidades-info>
 
         <app-card-localidades-info class="col-6" [quantidade]="totalBensCadastrados ?? 0" color="#faedc4"
-            title="Total de Bens Cadastrados">
+            (verMais)="goToBens()" title="Total de Bens Cadastrados">
         </app-card-localidades-info>
 
     </div>

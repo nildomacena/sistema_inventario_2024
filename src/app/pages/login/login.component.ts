@@ -39,10 +39,15 @@ export class LoginComponent {
 
   constructor() {
     this.loginForm = this.fb.group({
-      email: ['ednildo.filho@ifal.edu.br', Validators.required],
-      password: ['q1w2e3', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
       lembrarUsuario: [false],
     });
+    if (this.supabase.isLoggedIn) {
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+      }, 500);
+    }
   }
 
   async login() {

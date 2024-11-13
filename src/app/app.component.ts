@@ -1,5 +1,5 @@
-import { Component, inject, NgZone } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, NgZone, } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { SupabaseService } from './services/supabase.service';
 
@@ -16,13 +16,18 @@ export class AppComponent {
 
   supabaseService = inject(SupabaseService);
   zone = inject(NgZone);
-
+  router = inject(Router);
+  routerOutlet = inject(ActivatedRoute);
   constructor() {
     this.supabaseService.onAuthStateChange.subscribe((session) => {
       this.zone.run(() => {
-        this.usuarioLogado = session !== null;
+        this.usuarioLogado = !!session;
+        if (this.usuarioLogado) {
+          if (this.router.url === '/login') {
+            this.router.navigate(['/home']);
+          }
+        }
       });
     });
   }
-
 }

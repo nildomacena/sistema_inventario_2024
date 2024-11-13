@@ -1,0 +1,86 @@
+.bem-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+    display: flex;
+    flex-direction: column;
+}
+
+.bem-imagem {
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+:host ::ng-deep {
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #leitura,
+        #leitura * {
+            visibility: visible;
+        }
+
+        #leitura {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #action-buttons {
+            display: none;
+        }
+    }
+}
+
+.localidade-info {
+    margin-bottom: 10px;
+}
+
+button {
+    margin: 10px;
+}
+
+
+.cards-per-row-selector {
+    min-width: 150px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.bem-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+    display: flex;
+    flex-direction: column;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.img-container img {
+    max-width: 100%;
+    max-height: 200px;
+}
+
+.bem-imagem {
+    //imagem deve ocupar o máximo de espaco possível
+    // max-width: 100%;
+    // max-height: 100%;
+}

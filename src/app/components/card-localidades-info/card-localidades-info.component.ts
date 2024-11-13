@@ -17,7 +17,7 @@ export class CardLocalidadesInfoComponent {
   @Input() quantidade!: number;
   @Input() title?: string;
   @Input() color?: string;
-  @Output() newItemEvent = new EventEmitter();
+  @Output() verMais = new EventEmitter();
 
   constructor() { }
 
@@ -26,7 +26,7 @@ export class CardLocalidadesInfoComponent {
   }
 
   onClick() {
-    this.newItemEvent.emit();
+    this.verMais.emit();
   }
 
 }

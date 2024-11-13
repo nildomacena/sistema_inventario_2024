@@ -1,5 +1,49 @@
-:host ::ng-deep  .p-datatable  {
+:host ::ng-deep .p-datatable {
     margin-top: 40px;
     margin-bottom: 20px;
     border-radius: 10px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+/* src/app/components/localidade-detail/localidade-detail.component.scss */
+
+/* Container para os cards */
+.cards-container {
+    display: grid;
+    gap: 16px;
+    /* Espaço entre os cards */
+    padding: 16px;
+
+    /* Definindo as colunas com base na quantidade selecionada */
+    &.cards-per-row-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.cards-per-row-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.cards-per-row-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    &.cards-per-row-5 {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* Estilização opcional para os botões de controle */
+.control-buttons {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.cards-per-row-selector {
+    min-width: 150px;
 }

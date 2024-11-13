@@ -37,3 +37,98 @@ app-root {
     background-color: grey;
     margin: 20px 0;
 }
+
+
+body,
+.p-component {
+    font-family: "Rawline", sans-serif;
+}
+
+main {
+    width: 100vw;
+}
+
+.with-spinner {
+    display: flex;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.spinner {
+    align-self: center;
+}
+
+.emptymessage {
+    text-align: center !important;
+    padding: 2rem 0 !important;
+    font-weight: bold;
+}
+
+#help-button {
+    position: absolute;
+    bottom: 5rem;
+    right: 20rem;
+}
+
+small.error {
+    color: red;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+table {
+    tbody {
+        tr {
+            &:hover {
+                background-color: var(--surface-50) !important;
+            }
+        }
+    }
+}
+
+.no-select {
+    user-select: none;
+}
+
+input.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+p-dropdown.ng-invalid.ng-touched>div,
+p-inputnumber.ng-invalid.ng-touched>span>input,
+p-inputmask.ng-invalid.ng-touched>input {
+    border: 2px solid red;
+}
+
+.p-component {
+
+    &.p-inputtext.ng-invalid.ng-touched,
+    &.p-autocomplete.ng-invalid.ng-touched,
+    &.p-multiselect.ng-invalid.ng-touched {
+        border: 2px solid red;
+    }
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.center-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

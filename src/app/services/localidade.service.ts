@@ -51,7 +51,6 @@ export class LocalidadeService {
       { nome }
     ).select().single();
 
-    console.log(result);
     if (result.error || !result.data) {
       throw result.error;
     }

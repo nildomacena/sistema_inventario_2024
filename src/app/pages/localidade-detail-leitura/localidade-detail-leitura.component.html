@@ -1,0 +1,28 @@
+<section>
+    @if (localidade) {
+    <div class="localidade-info">
+
+        <h2>{{ localidade.localidade_nome }}</h2>
+        <p><strong>Número da Localidade:</strong> {{ localidade.inventario_localidade_id }}</p>
+        <p><strong>Status:</strong> {{ formatarStatus(localidade.status_inventario) }}</p>
+        <p><strong>Bens Cadastrados:</strong> {{ localidade.numero_bens }}</p>
+        <div id="action-buttons" style="display: flex; align-items: center;">
+            <button style="margin-left: 0;" pButton type="button" label="Voltar" icon="pi pi-arrow-left"
+                (click)="voltar()"></button>
+            <button pButton type="button" label="Imprimir" icon="pi pi-print" (click)="imprimir()"></button>
+            <p-dropdown [options]="cardsPerRowOptions" [(ngModel)]="selectedCardsPerRow" optionLabel="label"
+                optionValue="value" placeholder="Cards por Linha">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="cards">
+        <div *ngFor="let bem of bens" class="bem-card col-{{selectedCardsPerRow}}">
+            <div class="img-container">
+                <img [src]="bem.url_imagem" alt="Imagem do Bem" class="bem-imagem">
+            </div>
+            <p><strong>Patrimônio:</strong> {{ !!bem.patrimonio ? bem.patrimonio : 'Sem Patrimônio' }}</p>
+            <p><strong>Descrição:</strong> {{ bem.descricao }}</p>
+        </div>
+    </div>
+    }
+</section>

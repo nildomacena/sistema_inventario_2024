@@ -20,6 +20,16 @@
             "outputPath": "dist/sistema_inventario_2024",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "jspdf-autotable",
+              "raf",
+              "core-js",
+              "@babel",
+              "@supabase",
+              "supabase",
+              "rgbcolor",
+              "whatwg-url"
+            ],
             "polyfills": [
               "zone.js"
             ],
@@ -51,13 +61,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2mB",
+                  "maximumError": "5mB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "20kB",
+                  "maximumError": "100kB"
                 }
               ],
               "outputHashing": "all"

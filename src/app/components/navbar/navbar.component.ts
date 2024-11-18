@@ -21,7 +21,7 @@ export class NavbarComponent {
 
   supabaseService = inject(SupabaseService);
   router = inject(Router);
-
+  
   constructor() {
     this.supabaseService.onAuthStateChange.subscribe((authState) => {
       this.usuarioLogado = authState?.user;

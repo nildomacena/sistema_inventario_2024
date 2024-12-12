@@ -15,7 +15,8 @@ import { CardBemComponent } from '../../components/card-bem/card-bem.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-
+import { Router } from '@angular/router';
+ 
 @Component({
   selector: 'app-bens',
   standalone: true,
@@ -44,6 +45,7 @@ export class BensComponent {
   bensService = inject(BensService);
   bens: Bem[] = [];
   applicationRef = inject(ApplicationRef);
+  router = inject(Router);
   zone = inject(NgZone);
   loading = false;
 
@@ -110,5 +112,6 @@ export class BensComponent {
 
   acessarBem(bem: Bem) {
     console.log('Acessar bem: ', bem);
+    this.router.navigate(['/localidades', bem.inventario_id]);
   }
 }

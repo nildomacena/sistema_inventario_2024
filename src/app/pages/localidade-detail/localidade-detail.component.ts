@@ -15,6 +15,9 @@ import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { SupabaseService } from '../../services/supabase.service';
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @Component({
   selector: 'app-localidade-detail',
   standalone: true,
@@ -27,7 +30,9 @@ import { BrowserModule } from '@angular/platform-browser';
     TableModule,
     CardBemComponent,
     DropdownModule,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
   templateUrl: './localidade-detail.component.html',
   styleUrl: './localidade-detail.component.scss'
 })
@@ -43,6 +48,9 @@ export class LocalidadeDetailComponent implements OnInit {
   applicationRef = inject(ApplicationRef);
   localidadeService = inject(LocalidadeService);
   bensService = inject(BensService);
+  supabaseService = inject(SupabaseService);
+  confirmationService = inject(ConfirmationService);
+  isAdmin: boolean = false;
   bens: Bem[] = [];
   // Propriedades para controle de exibição
   displayMode: 'table' | 'card' | 'leitura' = 'table';
@@ -57,10 +65,21 @@ export class LocalidadeDetailComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.applicationRef.isStable.pipe(first((isStable) => isStable)).subscribe(() => {
       this.id = this.route.snapshot.paramMap.get('id');
       this.getLocalidade();
+      setTimeout(() => {
+        const userId = this.supabaseService.userLogged?.id;
+        if (userId) {
+          this.supabaseService.isAdmin(userId).then((isAdmin) => {
+            this.zone.run(() => {
+              this.isAdmin = isAdmin;
+              console.log('isAdmin:', isAdmin);
+            });
+          });
+        }
+      }, 1000);
     });
   }
 
@@ -108,5 +127,20 @@ export class LocalidadeDetailComponent implements OnInit {
     console.log('Imprimir');
     this.router.navigate(['/localidade-print', this.id]);
     // window.print();
+  }
+
+  async reabrirLocalidade(localidade: InventarioLocalidade) {
+    console.log('Reabrir localidade:', localidade);
+    this.confirmationService.confirm({
+      message: 'Você tem certeza que deseja reabrir esta localidade?',
+      accept: async () => {
+        try {
+          await this.localidadeService.reopenLocalidade(localidade.inventario_localidade_id);
+          this.getLocalidade();
+        } catch (error) {
+          console.error('Erro ao reabrir localidade:', error);
+        }
+      }
+    });
   }
 }

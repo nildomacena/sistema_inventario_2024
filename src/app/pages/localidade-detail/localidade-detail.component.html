@@ -1,3 +1,4 @@
+<p-confirmDialog />
 <section>
     @if(localidade){
     <p-card [header]="localidade.localidade_nome" [style]="{width: '100%'}">
@@ -24,7 +25,10 @@
         </div>
         <p-footer>
             <button pButton type="button" label="Voltar" icon="pi pi-arrow-left" (click)="voltar()"></button>
-            <button style="margin-left: 10px;" pButton type="button" label="Imprimir" icon="pi pi-print" (click)="imprimir()"></button>
+            <button style="margin-left: 10px;" pButton type="button" label="Imprimir" icon="pi pi-print"
+                (click)="imprimir()"></button>
+            <p-button *ngIf="isAdmin && localidade.status_inventario === 'finalizada'" icon="pi pi-unlock"
+                label="Reabrir" class="actions" (onClick)="reabrirLocalidade(localidade)" />
         </p-footer>
     </p-card>
     <div class="control-buttons p-mt-4 p-d-flex p-jc-between p-ai-center" style="display: flex;">

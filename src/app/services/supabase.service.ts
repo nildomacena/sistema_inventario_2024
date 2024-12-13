@@ -7,8 +7,9 @@ import {
   SupabaseClient,
   User,
 } from '@supabase/supabase-js'
-import { environment } from '../../environments/environment';
 import { BehaviorSubject, first } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { Usuario } from '../model/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class SupabaseService {
   isLoggedIn = false
   onAuthStateChange: BehaviorSubject<Session | null> = new BehaviorSubject<Session | null>(null);
   userLogged?: User;
+  userData?: Usuario;
 
   constructor(
     private applicationRef: ApplicationRef,) {
@@ -37,6 +39,9 @@ export class SupabaseService {
         this.isLoggedIn = session !== null
         this.onAuthStateChange.next(session);
         this.userLogged = session?.user
+        if (this.userLogged) {
+          this.fetchUserData(this.userLogged.id);
+        }
       });
     });
   }
@@ -70,6 +75,26 @@ export class SupabaseService {
 
   signOut() {
     return this.supabase.auth.signOut()
+  }
+
+  private fetchUserData(userId: string) {
+    this.supabase
+      .from('usuarios')
+      .select('*')
+      .eq('uid', userId)
+      .single()
+      .then(({ data, error }) => {
+        if (data) {
+          this.userData = data as unknown as Usuario;
+          console.log('User data:', this.userData);
+        } else {
+          console.error('Error fetching user data:', error);
+        }
+      });
+  }
+
+  async isAdmin(userId: string): Promise<boolean> {
+    return this.userData?.admin || false;
   }
 
 }

@@ -109,4 +109,19 @@ export class LocalidadeService {
       img.src = url;
     });
   }
+
+  async reopenLocalidade(id: number): Promise<void> {
+    console.log('Reabrir localidade:', id);
+    const { data, error } = await this.supabase
+      .from('inventario_localidade')
+      .update({ finalizada_em: null, status: 'em_andamento' })
+      .eq('id', id).single();
+
+    console.log('Reabrir localidade:', data);
+
+    if (error) {
+      console.log('Erro ao reabrir localidade:', error);
+      throw error;
+    }
+  }
 }

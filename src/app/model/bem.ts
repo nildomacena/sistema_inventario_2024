@@ -1,4 +1,5 @@
 export interface Bem {
+    inventario_id: number;
     patrimonio: string;
     descricao: string;
     estado: string;
